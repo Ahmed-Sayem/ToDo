@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoApp</title>
-</head>
-<body>
-    
-
+  </head>
+  <body>
+    <header>
+      <h1>ToDoApp</h1>
+    </header>
+    <div>
+      <input type="text" id="search-input" placeholder="Search tasks" />
+      <button id="search-button">Search</button>
+    </div>
+    <div>
+      <input type="text" id="task-input" placeholder="Write your task" />
+      <button id="add-button" disabled>Add Task</button>
+    </div>
+    <div>
+      <h5 id="message" hidden></h5>
+    </div>
+    <div class="tasks-container">
+      <ul id="tasks"></ul>
+    </div>
 
     <script type="module" src="./js/script.js"></script>
-</body>
+  </body>
 </html>
