@@ -14,11 +14,27 @@ const addButtonHandler = () => {
     createTask(taskTitle);
     showToastMessage("Task added successfully!");
     $addButton.disabled = true;
-  } else showToastMessage("Please provide a valid title!");
+  } else {
+    showToastMessage("Please provide a valid title!");
+  }
 };
 
 const deleteTask = (taskId) => {
   tasks = tasks.filter((task) => task.id !== taskId);
+  renderTasks();
+};
+
+const editTask = (task) => {
+  cancelEdit();
+  task.isEditing = true;
+  renderTasks();
+};
+
+const updateTask = (task, newTitle) => {
+  if (newTitle) {
+    task.title = newTitle;
+  }
+  cancelEdit();
   renderTasks();
 };
 
@@ -29,9 +45,7 @@ const createTask = (taskTitle) => {
     createdAt: formatDate(new Date()),
   };
   tasks.unshift(task);
-
   renderTasks();
-
   $taskInput.value = "";
 };
 
@@ -39,9 +53,20 @@ const renderTasks = () => {
   $taskList.innerHTML = "";
 
   tasks.forEach((task) => {
-    const $taskElement = createTaskElement(task, deleteTask);
+    const $taskElement = createTaskElement(
+      task,
+      deleteTask,
+      editTask,
+      updateTask,
+      cancelEdit
+    );
     $taskList.appendChild($taskElement);
   });
+};
+
+const cancelEdit = () => {
+  tasks.forEach((task) => (task.isEditing = false));
+  renderTasks();
 };
 
 $taskInput.addEventListener("input", () => {
