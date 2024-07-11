@@ -1,0 +1,229 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.button {
+  background: #ffffff;
+  color: #32394b;
+  border: none;
+}
+.splash {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0.8rem 12rem 0.8rem;
+  border: 2px solid #dde2ff;
+}
+.body-container {
+  padding: 0.5rem 12rem 0.5rem;
+}
+.top-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0rem;
+}
+.tasks-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  grid-auto-flow: dense;
+}
+#input-container {
+  grid-column: 1 / span 1;
+  grid-row: 1;
+}
+.task-container {
+  height: 9rem;
+  width: 90%;
+  padding: 1.5rem;
+  border-radius: 0.4rem;
+  border: 1.5px solid #dde2ff;
+}
+.toast-container {
+  border: 1px solid #fcfcfc;
+  height: 3rem;
+  width: 25rem;
+  border-radius: 0.4rem;
+  background-color: #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+}
+.top-icon img,
+.search-icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.top-icon {
+  width: 8rem;
+}
+.search-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding-left: 1rem;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+#search-input {
+  border-radius: 0.3rem;
+  border: none;
+  height: 0.65rem;
+  padding: 0.75rem 0.5rem;
+  width: 30rem;
+}
+#task-input {
+  border-radius: 0.3rem;
+  border: 3px solid #d1d8ff;
+  height: 6rem;
+  width: 97%;
+  font-size: xx-large;
+  resize: none;
+}
+
+#create-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7a8dfd;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+#save-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7a8dfd;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#create-button img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+.card-buttons {
+  border: none;
+  background: #ffffff;
+  margin-right: 0.5rem;
+}
+#add-button {
+  color: #000000;
+  margin-right: 1rem;
+}
+#load-more-button {
+  background-color: #32394b;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.4%;
+}
+.filters-button {
+  height: 2.4rem;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0rem 0.7rem;
+  text-align: center;
+  color: #020202;
+  background-color: #ffffff;
+  border: 1px solid #e9e9ed;
+  border-radius: 0.4rem;
+}
+.filters-button.active {
+  background-color: #7a8dfd;
+  color: white;
+}
+.task-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-top: 0.5rem;
+}
+.task-title {
+  margin: 0rem;
+  border-radius: 0.3rem;
+  height: 5rem;
+  width: 97%;
+  font-size: xx-large;
+  font-weight: 500;
+  resize: none;
+}
+#done-title {
+  color: #0bc375;
+  text-decoration: line-through;
+}
+#task-created-at {
+  color: #a4a1a1;
+  padding: 0rem;
+  margin: 0.5rem 0rem;
+}
+#task-done-at {
+  background: #7a8dfd;
+  color: #ffffff;
+  font-size: small;
+  border-radius: 4px;
+  padding: 0.3rem 0.8rem;
+  margin: 0rem;
+}
+#done-task-buttons {
+  justify-content: space-between;
+}
+#centered-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(240, 240, 240, 0.4);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
