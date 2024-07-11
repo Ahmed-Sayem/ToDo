@@ -1,8 +1,8 @@
 import { $taskInput, $addButton, $taskList } from "./elements.js";
 import {
   showToastMessage,
-  sanitizeInput,
   createTaskElement,
+  sanitizeInput,
   formatDate,
 } from "./utilities.js";
 
@@ -38,6 +38,14 @@ const updateTask = (task, newTitle) => {
   renderTasks();
 };
 
+const completeTask = (taskId) => {
+  const task = tasks.find((task) => task.id === taskId);
+  if (task) {
+    task.done = true;
+    renderTasks();
+  }
+};
+
 const createTask = (taskTitle) => {
   const task = {
     id: new Date().getTime(),
@@ -58,7 +66,8 @@ const renderTasks = () => {
       deleteTask,
       editTask,
       updateTask,
-      cancelEdit
+      cancelEdit,
+      completeTask
     );
     $taskList.appendChild($taskElement);
   });

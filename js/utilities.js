@@ -27,12 +27,16 @@ export const createTaskElement = (
   deleteTask,
   editTask,
   updateTask,
-  cancelEdit
+  cancelEdit,
+  completeTask
 ) => {
   const $taskItem = document.createElement("li");
 
   const $titleElement = document.createElement("span");
   $titleElement.textContent = task.title;
+  if (task.done) {
+    $titleElement.style.textDecoration = "line-through";
+  }
 
   if (task.isEditing) {
     const $inputField = document.createElement("input");
@@ -43,7 +47,9 @@ export const createTaskElement = (
       const sanitizedTitle = sanitizeInput($inputField.value);
       updateTask(task, sanitizedTitle);
     });
-    const $cancelButton = createElement("Cancel", "button", cancelEdit);
+    const $cancelButton = createElement("Cancel", "button", () => {
+      cancelEdit(task);
+    });
 
     $taskItem.append($inputField, $updateButton, $cancelButton);
   } else {
@@ -51,8 +57,14 @@ export const createTaskElement = (
       deleteTask(task.id)
     );
     const $editButton = createElement("Edit", "button", () => editTask(task));
+    const $doneButton = createElement("Done", "button", () =>
+      completeTask(task.id)
+    );
 
-    $taskItem.append($titleElement, $deleteButton, $editButton);
+    $taskItem.append($titleElement, $deleteButton);
+    if (!task.done) {
+      $taskItem.append($editButton, $doneButton);
+    }
   }
 
   return $taskItem;
