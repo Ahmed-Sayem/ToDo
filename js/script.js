@@ -1,8 +1,8 @@
 import { $taskInput, $addButton, $taskList } from "./elements.js";
 import {
   showToastMessage,
+  createTaskElement,
   sanitizeInput,
-  createElement,
   formatDate,
 } from "./utilities.js";
 
@@ -14,7 +14,36 @@ const addButtonHandler = () => {
     createTask(taskTitle);
     showToastMessage("Task added successfully!");
     $addButton.disabled = true;
-  } else showToastMessage("Please provide a valid title!");
+  } else {
+    showToastMessage("Please provide a valid title!");
+  }
+};
+
+const deleteTask = (taskId) => {
+  tasks = tasks.filter((task) => task.id !== taskId);
+  renderTasks();
+};
+
+const editTask = (task) => {
+  cancelEdit();
+  task.isEditing = true;
+  renderTasks();
+};
+
+const updateTask = (task, newTitle) => {
+  if (newTitle) {
+    task.title = newTitle;
+  }
+  cancelEdit();
+  renderTasks();
+};
+
+const completeTask = (taskId) => {
+  const task = tasks.find((task) => task.id === taskId);
+  if (task) {
+    task.done = true;
+    renderTasks();
+  }
 };
 
 const createTask = (taskTitle) => {
@@ -25,7 +54,6 @@ const createTask = (taskTitle) => {
   };
   tasks.unshift(task);
   renderTasks();
-
   $taskInput.value = "";
 };
 
@@ -33,10 +61,21 @@ const renderTasks = () => {
   $taskList.innerHTML = "";
 
   tasks.forEach((task) => {
-    const texts = [task.title, " Created at: " + task.createdAt];
-    const $tasksList = createElement(texts, "li");
-    $taskList.appendChild($tasksList);
+    const $taskElement = createTaskElement(
+      task,
+      deleteTask,
+      editTask,
+      updateTask,
+      cancelEdit,
+      completeTask
+    );
+    $taskList.appendChild($taskElement);
   });
+};
+
+const cancelEdit = () => {
+  tasks.forEach((task) => (task.isEditing = false));
+  renderTasks();
 };
 
 $taskInput.addEventListener("input", () => {
