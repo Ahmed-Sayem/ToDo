@@ -9,10 +9,17 @@
     <header>
       <h1>ToDoApp</h1>
     </header>
-    <h5 id="message" hidden></h5>
-    <p>Add Tasks</p>
-    <input type="text" id="task-input" placeholder="Write your task" />
-    <button id="add-button" disabled>Add Task</button>
+    <div>
+      <input type="text" id="search-input" placeholder="Search tasks" />
+      <button id="search-button">Search</button>
+    </div>
+    <div>
+      <input type="text" id="task-input" placeholder="Write your task" />
+      <button id="add-button" disabled>Add Task</button>
+    </div>
+    <div>
+      <h5 id="message" hidden></h5>
+    </div>
     <div class="tasks-container">
       <ul id="tasks"></ul>
     </div>

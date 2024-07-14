@@ -1,4 +1,10 @@
-import { $taskInput, $addButton, $taskList } from "./elements.js";
+import {
+  $taskInput,
+  $addButton,
+  $taskList,
+  $searchInput,
+  $searchButton,
+} from "./elements.js";
 import {
   showToastMessage,
   createTaskElement,
@@ -19,9 +25,27 @@ const addButtonHandler = () => {
   }
 };
 
+const searchButtonHandler = () => {
+  const searchTitle = sanitizeInput($searchInput.value);
+
+  if (searchTitle) {
+    const filteredTasks = tasks.filter((task) =>
+      task.title.toLowerCase().includes(searchTitle.toLowerCase())
+    );
+    if (filteredTasks.length > 0) {
+      renderTasks(filteredTasks);
+    } else {
+      showToastMessage("No tasks found matching the search.");
+    }
+  } else {
+    renderTasks(tasks);
+  }
+  $searchInput.value = "";
+};
+
 const deleteTask = (taskId) => {
   tasks = tasks.filter((task) => task.id !== taskId);
-  renderTasks();
+  renderTasks(tasks);
 };
 
 const editTask = (task) => {
@@ -35,14 +59,14 @@ const updateTask = (task, newTitle) => {
     task.title = newTitle;
   }
   cancelEdit();
-  renderTasks();
+  renderTasks(tasks);
 };
 
 const completeTask = (taskId) => {
   const task = tasks.find((task) => task.id === taskId);
   if (task) {
     task.done = true;
-    renderTasks();
+    renderTasks(tasks);
   }
 };
 
@@ -53,11 +77,11 @@ const createTask = (taskTitle) => {
     createdAt: formatDate(new Date()),
   };
   tasks.unshift(task);
-  renderTasks();
+  renderTasks(tasks);
   $taskInput.value = "";
 };
 
-const renderTasks = () => {
+const renderTasks = (tasks = []) => {
   $taskList.innerHTML = "";
 
   tasks.forEach((task) => {
@@ -75,7 +99,7 @@ const renderTasks = () => {
 
 const cancelEdit = () => {
   tasks.forEach((task) => (task.isEditing = false));
-  renderTasks();
+  renderTasks(tasks);
 };
 
 $taskInput.addEventListener("input", () => {
@@ -87,3 +111,4 @@ $taskInput.addEventListener("input", () => {
 });
 
 $addButton.addEventListener("click", addButtonHandler);
+$searchButton.addEventListener("click", searchButtonHandler);
