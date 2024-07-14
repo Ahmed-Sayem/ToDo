@@ -21,6 +21,9 @@ import { MESSAGES } from "./const.js";
 
 let tasks = [];
 let isVisible = false;
+let currentFilter = "all";
+let filteredOrSearchAbleTasks = [];
+
 
 const addButtonHandler = (container) => {
   isVisible = !isVisible;
